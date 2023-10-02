@@ -6,7 +6,7 @@
 /*   By: ugolin-olle <ugolin-olle@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 21:14:48 by ugolin-olle       #+#    #+#             */
-/*   Updated: 2023/09/28 11:40:49 by ugolin-olle      ###   ########.fr       */
+/*   Updated: 2023/09/28 11:45:49 by ugolin-olle      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ void	ft_free_buffer(t_list *buffer)
 	tmp = buffer;
 	while (tmp)
 	{
-		free(tmp);
 		next = tmp->next_string;
 		free(tmp->string);
+		free(tmp);
 		tmp = next;
 	}
 }
