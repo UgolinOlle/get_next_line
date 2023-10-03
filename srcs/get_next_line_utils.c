@@ -6,7 +6,7 @@
 /*   By: ugolin-olle <ugolin-olle@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 21:20:45 by ugolin-olle       #+#    #+#             */
-/*   Updated: 2023/09/28 11:40:39 by ugolin-olle      ###   ########.fr       */
+/*   Updated: 2023/10/03 13:48:28 by ugolin-olle      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_found_new_line(t_list *buffer)
 	int		i;
 	t_list	*tmp;
 
-	if (buffer == NULL)
+	if (buffer == 0)
 		return (0);
 	tmp = ft_get_last(buffer);
 	i = 0;
@@ -49,7 +49,7 @@ void	ft_badd(t_list **buffer, char *storage, int byte_readed)
 	new_node = malloc(sizeof(t_list));
 	if (!new_node)
 		return ;
-	new_node->next_string = NULL;
+	new_node->next_string = 0;
 	new_node->string = (char *)malloc(sizeof(char) * (byte_readed + 1));
 	if (!new_node->string)
 		return ;
@@ -119,4 +119,6 @@ void	ft_create_line(char **line, t_list *buffer)
 		buffer = buffer->next_string;
 	}
 	*line = (char *)malloc(sizeof(char) * (stor + 1));
+	if (!*line)
+		return ;
 }
