@@ -6,7 +6,7 @@
 /*   By: ugolin-olle <ugolin-olle@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 21:14:48 by ugolin-olle       #+#    #+#             */
-/*   Updated: 2023/10/03 13:42:40 by ugolin-olle      ###   ########.fr       */
+/*   Updated: 2023/10/06 13:44:56 by ugolin-olle      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
-void	ft_free_buffer(t_list *buffer)
+void	ft_free_buffer(t_list **buffer)
 {
 	t_list	*tmp;
 	t_list	*next;
 
-	tmp = buffer;
+	tmp = *buffer;
 	while (tmp)
 	{
 		next = tmp->next_string;
@@ -35,6 +35,7 @@ void	ft_free_buffer(t_list *buffer)
 		free(tmp);
 		tmp = next;
 	}
+	*buffer = NULL;
 }
 
 void	ft_radd(int fd, t_list **buffer, int byte_readed)
@@ -49,8 +50,8 @@ void	ft_radd(int fd, t_list **buffer, int byte_readed)
 		byte_readed = read(fd, storage, BUFFER_SIZE);
 		if ((*buffer == 0 && byte_readed == 0) || byte_readed == -1)
 		{
+			ft_free_buffer(buffer);
 			free(storage);
-			ft_free_buffer(*buffer);
 			return ;
 		}
 		storage[byte_readed] = '\0';
@@ -76,15 +77,15 @@ void	ft_bclean(t_list **buffer)
 		i++;
 	if (tmp->string && tmp->string[i] == '\n')
 		i++;
-	clean_node->string = (char *)malloc(sizeof(char) * ((ft_strlen(tmp->string)
-					- i) + 1));
+	clean_node->string = malloc(1 * (ft_strlen(tmp->string) - i + 1));
 	if (!clean_node->string)
 		return ;
 	j = 0;
 	while (tmp->string[i])
 		clean_node->string[j++] = tmp->string[i++];
 	clean_node->string[j] = '\0';
-	ft_free_buffer(*buffer);
+	if (*buffer != 0)
+		ft_free_buffer(buffer);
 	*buffer = clean_node;
 }
 
@@ -103,14 +104,14 @@ char	*get_next_line(int fd)
 		return (0);
 	if (byte_readed == -1)
 	{
-		ft_free_buffer(buffer);
+		ft_free_buffer(&buffer);
 		return (0);
 	}
 	ft_extract_line(buffer, &line);
 	ft_bclean(&buffer);
 	if (line[0] == '\0')
 	{
-		ft_free_buffer(buffer);
+		ft_free_buffer(&buffer);
 		free(line);
 		return (0);
 	}
