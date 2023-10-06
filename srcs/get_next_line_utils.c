@@ -6,11 +6,11 @@
 /*   By: ugolin-olle <ugolin-olle@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 21:20:45 by ugolin-olle       #+#    #+#             */
-/*   Updated: 2023/10/03 13:54:46 by ugolin-olle      ###   ########.fr       */
+/*   Updated: 2023/10/06 13:48:04 by ugolin-olle      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/get_next_line.h"
+#include "get_next_line.h"
 
 int	ft_found_new_line(t_list *buffer)
 {
