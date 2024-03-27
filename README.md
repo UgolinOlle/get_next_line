@@ -1,5 +1,9 @@
 # get_next_line
 
+<div align="center">
+    <img src="https://github.com/mcombeau/mcombeau/blob/main/42_badges/get_next_linen.png" alt="fract-ol 42 project badge">
+</div>
+
 [![42 School Project](https://img.shields.io/badge/42%20Project-get_next_line-blue)](https://github.com/your_username/get_next_line)
 [![Language: C](https://img.shields.io/badge/language-C-green.svg)](<https://en.wikipedia.org/wiki/C_(programming_language)>)
 
